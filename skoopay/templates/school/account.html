@@ -1,0 +1,9 @@
+{% extends 'layout.html'%} {%block main%} {% from "_formhelpers.html" import render_field %}
+<form method=post>
+    <h1>Finish setting your up account</h1>
+    <dl>
+        {{ render_field(form.mobile, class="form-control") }} {{ render_field(form.name,class="form-control") }}
+
+    </dl>
+    <p><input class="btn btn-primary" type=submit value=Submit>
+</form> {% endblock %}
