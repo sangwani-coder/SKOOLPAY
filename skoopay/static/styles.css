@@ -139,3 +139,127 @@ tr:hover {
     background-color: rgb(219, 218, 218);
     margin: auto;
 }
+
+
+/* PAY STYLE */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+.modal-body {
+    background-color: #fff;
+    border-color: #fff
+}
+
+.close {
+    color: #000;
+    cursor: pointer
+}
+
+.close:hover {
+    color: #000
+}
+
+.form-check-input:checked {
+    background-color: #8f37aa;
+    border-color: #8f37aa
+}
+
+.form-check-input:focus {
+    border-color: #8bbafe;
+    outline: 0;
+    box-shadow: none
+}
+
+label.radio {
+    cursor: pointer
+}
+
+label.radio input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none
+}
+
+label.radio span {
+    padding: 7px 12px;
+    border: 2px solid #8f37aa;
+    display: inline-block;
+    color: #8f37aa;
+    border-radius: 3px;
+    text-transform: capitalize
+}
+
+label.radio input:checked+span {
+    border-color: #8f37aa;
+    background-color: #8f37aa;
+    color: #fff
+}
+
+.fee {
+    padding: 8px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
+    margin-right: 8px
+}
+
+label.radio1 {
+    cursor: pointer;
+    width: 100%;
+    margin-right: 7px
+}
+
+label.radio1 input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none
+}
+
+label.radio1 span {
+    padding: 20px 12px;
+    border: 2px solid #8f37aa;
+    display: inline-block;
+    color: #8f37aa;
+    border-radius: 3px;
+    text-transform: capitalize;
+    width: 100%
+}
+
+label.radio1 input:checked+span {
+    border-color: #8f37aa;
+    background-color: #8f37aa;
+    color: #fff
+}
+
+.form-control {
+    border: 2px solid #ced4da
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #8f37aa
+}
+
+.pay {
+    color: #fff;
+    background-color: #8f37aa;
+    border-color: #8f37aa;
+    border-radius: 3px;
+    padding: 8px
+}
+
+.pay:hover {
+    color: #fff;
+    background-color: #8f37aa;
+    border-color: #8f37aa;
+    border-radius: 3px;
+    padding: 8px
+}
+
+.cancel {
+    text-decoration: none;
+    color: #8f37aa
+}

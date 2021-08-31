@@ -1,9 +1,170 @@
-{% extends 'layout.html'%} {%block main%} {% from "_formhelpers.html" import render_field %}
-<form method=post>
-    <h1>Finish setting your up account</h1>
-    <dl>
-        {{ render_field(form.mobile, class="form-control") }} {{ render_field(form.name,class="form-control") }}
+{% extends 'layout.html'%} {% from "_formhelpers.html" import render_field %} {% block head %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Hugo 0.84.0"> {% block title %}Dashboard{% endblock %}
 
-    </dl>
-    <p><input class="btn btn-primary" type=submit value=Submit>
-</form> {% endblock %}
+<!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/"> -->
+
+
+
+<!-- Bootstrap core CSS -->
+<link href="../../static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+    
+    @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+    }
+</style>
+
+
+<!-- Custom styles for this template -->
+<!-- <link href="../../static/assets/dist/css/dashboard.css" rel="stylesheet"> -->
+{% endblock %} {%block main%}
+
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/admin/dashboard">ADMIN Dashboard</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <div class="navbar-nav">
+    </div>
+</header>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="position-sticky pt-3">
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Receipts:</span>
+                    <a class="link-secondary" href="#" aria-label="Add a new report">
+                        <span data-feather="plus-circle"></span>
+                    </a>
+                </h6>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a aria-current="page" href="#">
+                            <span data-feather="home"></span> last 7 days:{{seven}}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <span data-feather="file"></span> last 21 days:{{twenty}}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <span data-feather="shopping-cart"></span> last 30 days:{{thirty}}
+                        </a>
+                    </li>
+                </ul>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Payments Report:</span>
+                    <a class="link-secondary" href="#" aria-label="Add a new report">
+                        <span data-feather="plus-circle"></span>
+                    </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard">
+                            <span data-feather="file-text"></span> term 1
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard">
+                            <span data-feather="file-text"></span> term 2
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard>
+                            <span data-feather=" file-text "></span> term 3
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link " href="/admin/dashboard ">
+                            <span data-feather="file-text "></span>pending amount
+                        </a>
+                    </li>
+                </ul>
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted ">
+                    <span>Other:</span>
+                    <a class="link-secondary " href="# " aria-label="Add a new report ">
+                        <span data-feather="plus-circle "></span>
+                    </a>
+                </h6>
+                <ul class="nav flex-column mb-2 ">
+                    <li class="nav-item ">
+                        <a href="/admin/sponsors ">
+                            <span data-feather="users "></span> user accounts
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="/admin/account ">
+                            <span data-feather="users "></span> add account
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="# ">
+                            <span data-feather="layers "></span> help
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
+            <section class="my-4 w-100 " id="myChart " width="900 " height="380 "></section>
+            <h2>Create Sponsor Account</h2>
+
+            <div class="card " style="width: 40rem; ">
+                <h5>Sponsor details:</h5>
+                <form action="/admin/account " method=post class="row g-3 form-inline ">
+                    <dl>
+                        <div class="form-group ">{{ render_field(form.title,class="form-select ") }} </div>
+                        <div class="form-group ">{{ render_field(form.firstname,class="form-control ") }} </div>
+                        <div class="form-group ">{{ render_field(form.surname,class="form-control ") }}</div>
+                        <div class="form-group ">{{ render_field(form.email,class="form-control ") }}</div>
+                        <div class="form-group ">{{ render_field(form.mobile, class="form-control ")}}</div>
+                        <h5>Beneficially details:</h5>
+                        <div class="form-group ">{{ render_field(form.beneficially_1, class="form-control " )}} 
+                            {{ render_field(form.grade,class="form-select ") }} 
+                        </div>
+                        <div class="form-group ">{{ render_field(form.beneficially_2,class="form-control ")}}
+                            {{ render_field(form.grade,class="form-select ") }} 
+                        </div>
+                        <div class="form-group ">{{ render_field(form.beneficially_3,class="form-control ")}}
+                            {{ render_field(form.grade,class="form-select ") }}
+                        </div>
+                        <div class="form-group ">{{ render_field(form.beneficially_4,class="form-control ")}}
+                            {{ render_field(form.grade,class="form-select ") }}
+                        </div>
+                    </dl>
+                    <div><p><input class="btn btn-primary " type=submit value=Submit></div>
+                        
+                </form>
+            </div>
+
+    </div>
+    </main>
+</div>
+</div>
+
+<script src="../../static/assets/dist/js/bootstrap.bundle.min.js "></script>
+
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js " integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE " crossorigin="anonymous "></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js " integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha " crossorigin="anonymous "></script>
+<!-- <script src="../../static/assets/dist/js/dashboard.js "></script> -->
+{% endblock%}

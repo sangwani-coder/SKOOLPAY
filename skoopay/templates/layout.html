@@ -34,25 +34,33 @@
         <a class="navbar-brand" href="/"><span class="blue">$</span><span class="red">k</span><span class="yellow">o</span><span class="yellow">o</span><span class="green">PAY</span> <span class="red">HOME</span></a>
         <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </button> {% if session == "user" %}
         <div class="collapse navbar-collapse" id="navbar">
-            {% if session == "user" %}
             <ul class="navbar-nav mr-auto mt-2" id="head">
-                <li class="nav-item"><a class="nav-link" href="/user/quote">Quote</a></li>
-                <li class="nav-item"><a class="nav-link" href="/user/pay">Pay</a></li>
-                <li class="nav-item"><a class="nav-link" href="/user/add">Add Pupil</a></li>
+                <li class="nav-item"><a class="nav-link" href="/user/dashboard">DASHBOARD</a></li>
+                <li class="nav-item"><a class="nav-link" href="/user/payment">Pay</a></li>
                 <li class="nav-item"><a class="nav-link" href="/user/history">History</a></li>
                 <li class="nav-item"><a class="nav-link" href="/user/account">ACCOUNT</a></li>
             </ul>
             <ul class="navbar-nav ml-auto mt-2">
+                <li class="nav-item"><a class="nav-link" href="/admin/contact">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/contact">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="/auth/logout">Log Out</a></li>
             </ul>
             {% elif session =="admin" %}
+            <ul class="navbar-nav mr-auto mt-2" id="head">
+                <li class="nav-item"><a class="nav-link" href="/admin/history">History</a></li>
+                <li class="nav-item"><a class="nav-link" href="/user/account">ACCOUNT</a></li>
+            </ul>
             <ul class="navbar-nav ml-auto mt-2">
+                <li class="nav-item"><a class="nav-link" href="/admin/contact">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/contact">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="/auth/logout">Log Out</a></li>
             </ul>
             {% else %}
             <ul class="navbar-nav ml-auto mt-2">
+                <li class="nav-item"><a class="nav-link" href="/admin/contact">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/contact">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="/auth/sign">Register</a></li>
                 <li class="nav-item"><a class="nav-link" href="/auth/login">Log In</a></li>
             </ul>

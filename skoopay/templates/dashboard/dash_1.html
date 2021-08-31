@@ -32,6 +32,26 @@
 <!-- Custom styles for this template -->
 <!-- <link href="../../static/assets/dist/css/dashboard.css" rel="stylesheet"> -->
 {% endblock %} {%block main%}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Help!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                Contact support: Email: zteche@outlook.com Mobile: +260 950 505297
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-fluid">
     <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -58,9 +78,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">
-                            <span data-feather="layers"></span> help
-                        </a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Help
+                        </button>
                     </li>
                 </ul>
 
@@ -112,7 +133,7 @@
 
             <section class="my-4 w-100" id="myChart" width="900" height="380"></section>
 
-            <h2>Beneficially Summary</h2>
+            <h2>Account Summary</h2>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
@@ -134,12 +155,37 @@
                             <td>Grade</td>
                             <td>amount</td>
                         </tr>
+                        <tr>
+                            <td>1,001</td>
+                            <td>Sepiso</td>
+                            <td>Example School</td>
+                            <td>amount</td>
+                            <td>Grade</td>
+                            <td>amount</td>
+                        </tr>
+                        <tr>
+                            <td>CASH</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>20000</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>TOTAL CASH</strong></td>
+                            <td><strong>20000</strong></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </main>
     </div>
 </div>
+
 
 
 <script src="../../static/assets/dist/js/bootstrap.bundle.min.js"></script>
