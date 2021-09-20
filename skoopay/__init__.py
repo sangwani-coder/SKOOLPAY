@@ -41,6 +41,13 @@ def create_app(test_config=None):
 
     @app.route('/', methods=['GET', 'POST'])
     def homepage():
+        schools = {'Shalom School':'2021', 'Elim':'2022', 'Jack':'2023'}
+
+
+        shalom = ['2030', 'Taonga Hara', 'Shalom Christian School', '2300', 'Grade 6']
+        elim = ['2030', 'Taonga Banda', 'Elim School', '2300', 'Grade 7']
+        jack = ['2030', 'Tembo Banda', 'Jack School', '2300', 'Grade 2']
+         
         try:
             if request.method == 'GET':
                 return render_template('school/index.html', session='user_ot')
@@ -52,9 +59,18 @@ def create_app(test_config=None):
 
             elif not request.form.get('studentcode'):
                 return apology("Must provide Student code")
+
+            elif request.form.get('schoolcode') == schools['Shalom School'] and request.form.get('studentcode') == '2030':
                 
+                return render_template('parent/pay.html', std = shalom)
+
+            elif request.form.get('schoolcode') == schools['Elim'] and request.form.get('studentcode') == '2030':
+                return render_template('parent/pay.html', std = elim)
+
+            elif request.form.get('schoolcode') == schools['Jack'] and request.form.get('studentcode') == '2030':
+                return render_template('parent/pay.html', std = jack)
             else:
-                return redirect('user/payment')
+                return apology("No records found")
         except Exception as e:
             print(e)
  

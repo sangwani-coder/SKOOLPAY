@@ -1,21 +1,26 @@
 # Collection request to pay POST 
 
+from re import X
+
+
 subscription_key = '47d15957a260416889b69c6b882c87c4'
 x_reference_id = ''
 
-def request_to_pay():
+
+'''request payment from a consumer (payer)'''
+def request_to_pay(amount, partyid):
     import requests
     import json
 
     url = "https://sandbox.momodeveloper.mtn.com/collection/v1_0/requesttopay"
 
     payload = json.dumps({
-    "amount": "90",
+    "amount": amount,
     "currency": "EUR",
     "externalId": "012356",
     "payer": {
     "partyIdType": "MSISDN",
-    "partyId": "0969620939"
+    "partyId": partyid
     },
     "payerMessage": "pay for school",
     "payeeNote": "payer note"
@@ -24,14 +29,15 @@ def request_to_pay():
         'X-Reference-Id': x_reference_id,
         'Ocp-Apim-Subscription-Key': subscription_key,
         'X-Target-Environment': 'sandbox',
-        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjZmN2FlMzQ0LTJkY2EtNGU3Zi05ZDAxLTM1YzhlNTNhNDJkYiIsImV4cGlyZXMiOiIyMDIxLTA5LTE0VDE1OjU4OjMxLjIxOSIsInNlc3Npb25JZCI6IjI0ZTc0NDg2LTlmZjEtNDcyNS05YzUxLTI2MzU3Njg2ZWI1NSJ9.CsH4Lu9ko2WbxlWOGO5giTilZ22lDd0K8Mck0v2JVd1WkdYC7Kc0f43jObMvjX96Gg1x7zcGHPM80AemlUthizmAqdkcmZvOq7L6iKJO8HRZiMSDaJptuelE2funFbog5UT3M1K9kQqJNhbSzhCIKozt4iHWgw1JPdz4AmNIH6bwq3muvZ63iX20TkhUrN-dJK5vIu24wTLxRgTJaTDlheNn0MGs5fY7ykz-STOY2wKSvsVDSp0jOWH7aglj5ZTt3ACaGC3lVhS6KgDI9_dHhdqDl_WXHuZVFJXuPeIvXwZYnX6zaT8nlXg7SFBp_yn32JChLCZJdqjnAgKXFEfW8A',
+        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjZmN2FlMzQ0LTJkY2EtNGU3Zi05ZDAxLTM1YzhlNTNhNDJkYiIsImV4cGlyZXMiOiIyMDIxLTA5LTIwVDEwOjE1OjM5LjM4MiIsInNlc3Npb25JZCI6IjU5OWMyOWRjLWEzZGUtNDM2OC05OGEzLTA2YWY2M2RjOTQ4OCJ9.H3x8sAb13C8Hsvqb1ay4dGA2TzINS1HD7Jid_DUWgfVkCHmSsnoFo7mhxMQjHzShwb2G8PegzOi_-Be_jI3PjElvIJ4ww_HBJQVLN2CWSXdq-rCBAaRqKBnVWj2ZSjx9abisdhc7VoAE-0em85mYXUTWlmf5iT1geKH9lQHI45sClnM-3PWVtxui_dSclghjqrhnczOujafI_yZS3uPOyuqRttw6yRnhjbQWPQjpTBGsQzLIDuCTWEhtLNAqYswkXBNF3W09YZ3l9zVAT67QPK_D16lGNFHimVKfX_F5h9hbsVTkGvhaEkx4z2uxTiEjWhYX8xRaau1iy_YQPSm5pw',
         'Content-Type': 'application/json'
     }
 
     response = requests.request("POST", url, headers=headers, data=payload, timeout=60)
 
-    print("Request to pay:",response.text)
+    status = response.status_code
 
+    return status
 
 # Get X-reference-Id
 def get_uuid():
@@ -42,13 +48,29 @@ def get_uuid():
 
     payload={}
     headers = {
-        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjZmN2FlMzQ0LTJkY2EtNGU3Zi05ZDAxLTM1YzhlNTNhNDJkYiIsImV4cGlyZXMiOiIyMDIxLTA5LTE0VDE1OjU4OjMxLjIxOSIsInNlc3Npb25JZCI6IjI0ZTc0NDg2LTlmZjEtNDcyNS05YzUxLTI2MzU3Njg2ZWI1NSJ9.CsH4Lu9ko2WbxlWOGO5giTilZ22lDd0K8Mck0v2JVd1WkdYC7Kc0f43jObMvjX96Gg1x7zcGHPM80AemlUthizmAqdkcmZvOq7L6iKJO8HRZiMSDaJptuelE2funFbog5UT3M1K9kQqJNhbSzhCIKozt4iHWgw1JPdz4AmNIH6bwq3muvZ63iX20TkhUrN-dJK5vIu24wTLxRgTJaTDlheNn0MGs5fY7ykz-STOY2wKSvsVDSp0jOWH7aglj5ZTt3ACaGC3lVhS6KgDI9_dHhdqDl_WXHuZVFJXuPeIvXwZYnX6zaT8nlXg7SFBp_yn32JChLCZJdqjnAgKXFEfW8A'
+        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjZmN2FlMzQ0LTJkY2EtNGU3Zi05ZDAxLTM1YzhlNTNhNDJkYiIsImV4cGlyZXMiOiIyMDIxLTA5LTIwVDEwOjE1OjM5LjM4MiIsInNlc3Npb25JZCI6IjU5OWMyOWRjLWEzZGUtNDM2OC05OGEzLTA2YWY2M2RjOTQ4OCJ9.H3x8sAb13C8Hsvqb1ay4dGA2TzINS1HD7Jid_DUWgfVkCHmSsnoFo7mhxMQjHzShwb2G8PegzOi_-Be_jI3PjElvIJ4ww_HBJQVLN2CWSXdq-rCBAaRqKBnVWj2ZSjx9abisdhc7VoAE-0em85mYXUTWlmf5iT1geKH9lQHI45sClnM-3PWVtxui_dSclghjqrhnczOujafI_yZS3uPOyuqRttw6yRnhjbQWPQjpTBGsQzLIDuCTWEhtLNAqYswkXBNF3W09YZ3l9zVAT67QPK_D16lGNFHimVKfX_F5h9hbsVTkGvhaEkx4z2uxTiEjWhYX8xRaau1iy_YQPSm5pw'
     }
 
     response = requests.request("GET", url, headers=headers, data=payload, timeout=60)
 
     x_reference_id = response.text
-    print("X-reference-ID:",response.text)
 
-get_uuid()
-request_to_pay()
+def get_transaction_status():
+    import requests
+    url = "https://sandbox.momodeveloper.mtn.com/collection/v1_0/requesttopay/{x_reference_id}".format(x_reference_id=x_reference_id)
+    payload={}
+    headers = {
+        'X-Target-Environment': 'sandbox',
+        'Ocp-Apim-Subscription-Key':  subscription_key,
+        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjZmN2FlMzQ0LTJkY2EtNGU3Zi05ZDAxLTM1YzhlNTNhNDJkYiIsImV4cGlyZXMiOiIyMDIxLTA5LTIwVDEwOjE1OjM5LjM4MiIsInNlc3Npb25JZCI6IjU5OWMyOWRjLWEzZGUtNDM2OC05OGEzLTA2YWY2M2RjOTQ4OCJ9.H3x8sAb13C8Hsvqb1ay4dGA2TzINS1HD7Jid_DUWgfVkCHmSsnoFo7mhxMQjHzShwb2G8PegzOi_-Be_jI3PjElvIJ4ww_HBJQVLN2CWSXdq-rCBAaRqKBnVWj2ZSjx9abisdhc7VoAE-0em85mYXUTWlmf5iT1geKH9lQHI45sClnM-3PWVtxui_dSclghjqrhnczOujafI_yZS3uPOyuqRttw6yRnhjbQWPQjpTBGsQzLIDuCTWEhtLNAqYswkXBNF3W09YZ3l9zVAT67QPK_D16lGNFHimVKfX_F5h9hbsVTkGvhaEkx4z2uxTiEjWhYX8xRaau1iy_YQPSm5pw'
+    }
+
+    response = requests.request("GET", url, headers=headers, data=payload, timeout=60)
+
+    status = response.status_code
+    print("transaction status:", response.text)
+    return status
+
+# get_uuid()
+# request_to_pay()
+# get_transaction_status()
